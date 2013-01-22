@@ -8,7 +8,7 @@ class ProjectsController < ApplicationController
   end
 
   def create
-  	@project = Project.new(params[:project]) <co id="ch03_551_1"/>
+  	@project = Project.new(params[:project]) #<co id="ch03_551_1"/>
   	if @project.save
     	flash[:notice] = "Project has been created."
     	redirect_to @project
@@ -16,4 +16,9 @@ class ProjectsController < ApplicationController
     	# nothing, yet
   	end
   end
+
+  def show
+  	@project = Project.find(params[:id])
+  end
+
 end
