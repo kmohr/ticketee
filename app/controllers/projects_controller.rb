@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
   
+  before_filter :authorize_admin!, :except => [:index, :show]
   before_filter :find_project, :only => [:show, :edit, :update, :destroy]
 
   def index
@@ -20,10 +21,19 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-	@project.destroy #<co id="ch04_233_1"/>
+	@project.destroy 
 	flash[:notice] = "Project has been deleted."
 	redirect_to projects_path
   end
+
+  private
+    def authorize_admin!
+      authenticate_user!
+      unless current_user.admin?
+        flash[:alert] = "You must be an admin to do that."
+        redirect_to root_path
+      end
+    end
 
   def new
   	@project = Project.new
@@ -36,7 +46,6 @@ class ProjectsController < ApplicationController
 	    redirect_to @project
 	  else
 	    flash[:alert] = "Project has not been created."
-	    #<co id="ch03_926_1"/>
 	    render :action => "new"
 	   end 
 	end
