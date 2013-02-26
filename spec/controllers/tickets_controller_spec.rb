@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe TicketsController do
-	let(:user) { Factory(:confirmed_user) }
+	let(:user)    { Factory(:confirmed_user) }
 	let(:project) { Factory(:project) }
-	let(:ticket) { Factory(:ticket, :project => project, :user => user) }
+	let(:ticket)  { Factory(:ticket, :project => project, :user => user) }
 
 	context "standard users" do
 		it "cannot access a ticket for a project" do
@@ -27,7 +27,7 @@ describe TicketsController do
 			end
 
 			def cannot_update_tickets!
-				response.should :redirect_to(project)
+				response.should redirect_to(project)
 				flash[:alert].should eql("You cannot edit tickets on this project.")
 			end
 
@@ -53,7 +53,7 @@ describe TicketsController do
 
 			it "cannot delete a ticket without permission" do 
 				delete :destroy, { :project_id => project.id, :id => ticket.id }
-				response.should :redirect_to(project)
+				response.should redirect_to(project)
 				message = "You cannot delete tickets from this project."
 				flash[:alert].should eql(message)
 			end

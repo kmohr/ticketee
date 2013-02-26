@@ -13,7 +13,7 @@ feature "Viewing projects" do
   scenario "Listing all projects" do
     visit '/'
     page.should_not have_content("Internet Explorer")
-    click_link project.title
+    click_link project.name
     page.current_url.should == project_url(project)
   end
   
