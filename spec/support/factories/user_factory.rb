@@ -11,6 +11,13 @@ FactoryGirl.define do
       end
 	  end
 
+    factory :confirmed_user_bad do
+      email "confirmed_user_bad@email.com"
+      after_create do |user|
+        user.confirm!
+      end
+    end
+
     factory :admin_user do
       email "admin_user@email.com"
       after_create do |user|
