@@ -28,6 +28,7 @@ group :test, :development do
 end
 
 group :test do
+  gem 'database_cleaner', '0.7.2'
   gem 'capybara', '1.1.2'
   gem 'factory_girl', '2.6.4'
   gem 'devise', '2.1.0.rc'
